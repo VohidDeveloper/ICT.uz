@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="wrapper bg-light">
+    <div class="container py-16 py-md-18">
+
+      <div class="row gx-md-8 gx-xl-12 gy-10">
+        <div class="col-12">
+            <div>
+                <h2 class="text-center alert alert-success">Testlar</h2>
+                <div class="d-flex justify-content-between">
+                    <div class="mb-2" align="left" id="vaqt"><b>Berilgan vaqt: 30 daqiqa</b></div>
+                    <div class="mb-2" align="right" id="displaytimer"><b>Vaqt: 0 sekund</b></div>
+                </div>
+            </div>
+            <form class="border border-success rounded p-3" method="post" id="formID">
+                {% csrf_token %}
+                {% for quiz in quizes %}
+                    <div class="form-check mb-2">
+                    <h4>{{ forloop.counter }}. {{ quiz.title }}</h4>
+                      <input class="form-check-input" value="a" type="radio" name="answer_{{ quiz.id }}" id="option_a">
+                      <label class="form-check-label" for="option_a">{{ quiz.option_a }}</label><br>
+                        
+                      <input class="form-check-input" value="b" type="radio" name="answer_{{ quiz.id }}" id="option_b">
+                      <label class="form-check-label" for="option_b">{{ quiz.option_b }}</label><br>
+                        
+                      <input class="form-check-input" value="c" type="radio" name="answer_{{ quiz.id }}" id="option_c">
+                      <label class="form-check-label" for="option_c">{{ quiz.option_c }}</label><br>
+                        
+                      <input class="form-check-input" value="d" type="radio" name="answer_{{ quiz.id }}" id="option_d">
+                      <label class="form-check-label" for="option_d">{{ quiz.option_d }}</label>
+                    </div>
+                {% endfor %}
+                <div class="text-center mt-2">
+                    <button id="submitBtn" class="btn btn-success text-white" type="submit">Yakunlash</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+const timer = document.getElementById('displaytimer');
+
+let seconds = 0;
+
+const intervalId = setInterval(() => {
+    seconds += 1;
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+
+    let timerText = `<b>Vaqt: ${minutes} minut ${remainingSeconds} sekund</b>`;
+    timer.innerHTML = timerText;
+
+    // Agar minut 30 ga yetgan bo'lsa
+    if (minutes >= 30) {
+        // radio tugmalarini olish
+        const optionA = document.querySelectorAll('#option_a');
+        const optionB = document.querySelectorAll('#option_b');
+        const optionC = document.querySelectorAll('#option_c');
+        const optionD = document.querySelectorAll('#option_d');
+        
+        // tiliklarni olish
+        const labelA = document.querySelectorAll('label[for="option_a"]');
+        const labelB = document.querySelectorAll('label[for="option_b"]');
+        const labelC = document.querySelectorAll('label[for="option_c"]');
+        const labelD = document.querySelectorAll('label[for="option_d"]');
+        
+        // radio tugmalarni va tiliklarni disabled qilish
+        optionA.forEach((option) => {
+            option.disabled = "disabled";
+        });
+        
+        labelA.forEach((label) => {
+            label.classList.add('disabled');
+        });
+        
+        // radio tugmalarni va tiliklarni disabled qilish
+        optionB.forEach((option) => {
+            option.disabled = "disabled";
+        });
+        
+        labelB.forEach((label) => {
+            label.classList.add('disabled');
+        });
+        
+        // radio tugmalarni va tiliklarni disabled qilish
+        optionC.forEach((option) => {
+            option.disabled = "disabled";
+        });
+        
+        labelC.forEach((label) => {
+            label.classList.add('disabled');
+        });
+        
+        // radio tugmalarni va tiliklarni disabled qilish
+        optionD.forEach((option) => {
+            option.disabled = "disabled";
+        });
+        
+        labelD.forEach((label) => {
+            label.classList.add('disabled');
+        });
+        
+        timer.innerHTML = `<b style="color: red;">Vaqtingiz tugadi!</b>`
+        
+        // Vaqt cheksiz o'chirilsin
+        clearInterval(intervalId);
+    }
+}, 1000);    
+</script>
+{% endblock %}

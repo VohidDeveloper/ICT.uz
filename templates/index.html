@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section-frame mx-xxl-11 overflow-hidden">
+    <div class="wrapper image-wrapper bg-image bg-cover bg-overlay bg-overlay-light-500"
+         data-image-src="{% static 'images/new/bg23.png' %}">
+        <div class="container py-16 py-md-18 text-center position-relative">
+            <div class="position-absolute shape yellow d-none d-lg-block w-5" style="top: 18%; left: 5%;"><img
+                    src="{% static 'images/pie.svg' %}" class="svg-inject icon-svg w-100 h-100" alt=""></div>
+            <div class="position-absolute shape leaf d-none d-lg-block w-10" style="bottom: 30%; left: 2%;"><img
+                    src="{% static 'images/scribble.svg' %}" class="svg-inject icon-svg w-100 h-100" alt=""></div>
+            <div class="position-absolute shape fuchsia d-none d-lg-block w-6"
+                 style="top: 20%; right: 2%; transform: rotate(70deg);"><img src="{% static 'images/tri.svg' %}"
+                                                                             class="svg-inject icon-svg w-100 h-100"
+                                                                             alt=""></div>
+            <div class="position-absolute shape grape d-none d-lg-block w-6" style="bottom: 28%; right: 5%;"><img
+                    src="{% static 'images/circle.svg' %}" class="svg-inject icon-svg w-100 h-100" alt=""></div>
+            <div class="row">
+                <div class="col-lg-9 col-xxl-8 mx-auto">
+                    <h1 class="display-1 fs-50 px-md-10 px-lg-0 px-xl-8 mb-5">{{ HOME_WELCOME.title|safe }}</h1>
+                    <p class="lead fs-24 px-md-10 px-lg-0 mx-lg-n10 mx-xl-0 mb-8">{{ HOME_WELCOME.body }}</p>
+                    <a href="{{ HOME_WELCOME.button_link }}" class="btn btn-lg btn-primary btn-icon btn-icon-end">
+                        {{ HOME_WELCOME.button_title }}
+                        <i class="uil uil-arrow-up-right"></i>
+                    </a>
+                </div>
+                <!-- /column -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.wrapper -->
+</section>
+<!-- /section -->
+
+<section class="wrapper bg-light" id="all-materials">
+    <div class="container pt-16 pt-md-18">
+        <div class="row d-flex align-items-start gy-10 mb-18 mb-md-20">
+            <div class="col-lg-5 position-lg-sticky" style="top: 8rem;">
+                <h3 class="display-2 mb-5">{{ HOME_YONALISHLAR.title }}</h3>
+                <p class="mb-7">{{ HOME_YONALISHLAR.body }}</p>
+                <a href="{{ HOME_YONALISHLAR.button_link }}" class="btn btn-lg btn-primary btn-icon btn-icon-end">
+                    {{ HOME_YONALISHLAR.button_title }}
+                    <i class="uil uil-arrow-up-right"></i>
+                </a>
+            </div>
+            <!-- /column -->
+            <div class="col-lg-6 ms-auto">
+                {% for i in HOME_YONALISHLAR_FOR %}
+                <div class="card bg-soft-orange mb-6">
+                    <div class="card-body d-flex flex-row">
+                        <div>
+                            <img src="{{ i.svg.url }}"
+                                 class="svg-inject icon-svg icon-svg-md text-orange me-5" alt="AsliddinWeb">
+                        </div>
+                        <div>
+                            <h3 class="fs-21 mb-2">{{ i.title }}</h3>
+                            <p class="mb-0">{{ i.body }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- /column -->
+        </div>
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /section -->
+
+<section id="all-courses" class="section-frame mx-xxl-11 overflow-hidden">
+    <div class="wrapper image-wrapper bg-image bg-cover bg-overlay bg-overlay-light-500"
+         data-image-src="{% static 'images/new/bg23.png' %}" style="background-image: url('{% static " images
+    /new/bg23.png" %}');">
+    <div class="container py-14 py-md-16">
+        <div class="row text-center">
+            <div class="col-xl-10 mx-auto">
+                <h2 class="fs-15 text-uppercase text-primary mb-3">Hozirda mavjud</h2>
+                <h3 class="display-4 mb-10 px-xxl-15">Barcha yo'nalishlar</h3>
+            </div>
+            <!-- /column -->
+        </div>
+        <!-- /.row -->
+        <div class="row gy-6">
+            {% for i in HOME_MAVJUD_YONALISHLAR %}
+            <div class="col-md-6 col-lg-4">
+                <a href="{{ i.link }}" class="card shadow-lg lift h-100">
+                    <div class="card-body p-5 d-flex flex-row">
+                        <div>
+                            <span class="avatar bg-red text-white w-11 h-11 fs-20 me-4">{{ i.letter }}</span>
+                        </div>
+                        <div>
+                            <span class="badge rounded py-1 mb-2 {{ i.cap_color }}">{{ i.cap_title }}</span>
+                            <h4 class="mb-1">{{ i.title }}</h4>
+                            <p class="mb-0 text-body">{{ i.body }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /section -->
+
+<section class="wrapper bg-light">
+    <div class="container py-16 py-md-18">
+        <div class="row gx-md-8 gx-xl-12 gy-10 align-items-center mb-16 mb-md-18">
+            <div class="col-md-8 col-lg-6 mx-auto">
+                <div class="img-mask px-xxl-5"><img src="{{ HOME_ABOUT_ME.image1.url }}"
+                                                           srcset="{{ HOME_ABOUT_ME.image2.url }} 2x" alt="AsliddinWeb">
+                </div>
+            </div>
+            <!--/column -->
+            <div class="col-lg-6">
+                <h2 class="display-2 mb-3">{{ HOME_ABOUT_ME.title }}</h2>
+                <p class="lead fs-24">{{ HOME_ABOUT_ME.cap_title }}</p>
+                <p>{{ HOME_ABOUT_ME.body }}</p>
+                <a href="{{ HOME_ABOUT_ME.button_link }}" class="btn btn-primary btn-icon btn-icon-end mt-2">
+                    {{ HOME_ABOUT_ME.button_title }} <i
+                            class="uil uil-arrow-up-right"></i></a>
+            </div>
+            <!--/column -->
+        </div>
+        <!-- /.row -->
+        <div class="row gx-md-8 gx-xl-12 gy-10">
+            <div class="col-lg-5 mx-auto">
+                <h2 class="display-2 mb-3">{{ HOME_MEHNAT_FAOLIYATIM.title }}</h2>
+                <p class="lead fs-24 pe-xxl-8">{{ HOME_MEHNAT_FAOLIYATIM.body }}</p>
+                <a href="{{ HOME_MEHNAT_FAOLIYATIM.button_link }}" class="btn btn-primary btn-icon btn-icon-end mt-2">
+                    {{ HOME_MEHNAT_FAOLIYATIM.button_title }} <i
+                            class="uil uil-arrow-up-right"></i></a>
+            </div>
+            <!--/column -->
+            <div class="col-lg-7">
+                <ul class="timeline">
+                    {% for i in HOME_MEHNAT_FAOLIYATIM_DIVS %}
+                    <li class="timeline-item">
+                        <div class="timeline-info meta fs-14">{{ i.year }}</div>
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">{{ i.title }}</h3>
+                            <p>{{ i.body }}</p>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!--/column -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+
+<section id="app" class="section-frame mx-xxl-11 overflow-hidden">
+    <div class="wrapper image-wrapper bg-image bg-cover bg-overlay bg-overlay-light-500"
+         data-image-src="{% static 'images/new/bg23.png' %}" style="background-image: url('{% static " images
+    /new/bg23.png" %}');">
+    <div class="container pt-10 pb-15 py-lg-17 py-xl-20 py-xxl-22 position-relative">
+        <img class="position-lg-absolute col-12 col-lg-12 mt-lg-n50p mb-3 mb-md-10 mb-lg-0"
+             src="{{ HOME_APP.image1 }}" srcset="{{ HOME_APP.image2 }} 2x" data-cue="fadeIn" alt="AsliddinWeb"
+             style="top: 50%; left: -23%; animation-name: fadeIn; animation-duration: 700ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;"
+             data-show="true">
+        <div class="row gx-lg-8 gx-xl-12 align-items-center">
+            <div class="col-md-10 offset-md-1 col-lg-6 offset-lg-6 mt-md-n9 text-center text-lg-start"
+                 data-cues="slideInDown" data-group="download" data-disabled="true">
+                <h1 class="display-4 mb-4 px-md-10 px-lg-0" data-cue="slideInDown" data-group="download"
+                    data-show="true"
+                    style="animation-name: slideInDown; animation-duration: 700ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
+                    {{ HOME_APP.title }}
+                </h1>
+                <p class="lead fs-lg mb-7 px-md-10 px-lg-0 pe-xxl-15" data-cue="slideInDown"
+                   data-group="download" data-show="true"
+                   style="animation-name: slideInDown; animation-duration: 700ms; animation-timing-function: ease; animation-delay: 300ms; animation-direction: normal; animation-fill-mode: both;">
+                    {{ HOME_APP.body }}</p>
+                <div class="d-flex justify-content-center justify-content-lg-start" data-cues="slideInDown"
+                     data-group="download" data-cue="slideInDown" data-disabled="true" data-show="true"
+                     style="animation-name: slideInDown; animation-duration: 700ms; animation-timing-function: ease; animation-delay: 600ms; animation-direction: normal; animation-fill-mode: both;">
+                            <span data-cue="slideInDown" data-group="download" data-show="true"
+                                  style="animation-name: slideInDown; animation-duration: 700ms; animation-timing-function: ease; animation-delay: 900ms; animation-direction: normal; animation-fill-mode: both;"><a
+                                    href="{{ HOME_APP.app_store_link }}"
+                                    class="btn btn-primary btn-icon btn-icon-start rounded me-2"><i
+                                    class="uil uil-apple"></i> {{ HOME_APP.app_store_title }}</a></span>
+                    <span data-cue="slideInDown" data-group="download" data-show="true"
+                          style="animation-name: slideInDown; animation-duration: 700ms; animation-timing-function: ease; animation-delay: 1200ms; animation-direction: normal; animation-fill-mode: both;"><a
+                            href="{{ HOME_APP.google_play_link }}"
+                            class="btn btn-green btn-icon btn-icon-start rounded"><i
+                            class="uil uil-google-play"></i> {{ HOME_APP.google_play_title }}</a></span>
+                </div>
+            </div>
+            <!-- /column -->
+        </div>
+        <!-- /.row -->
+    </div>
+    </div>
+    <!-- /.container -->
+</section>
+
+<section id="telegram-group" class="wrapper image-wrapper bg-auto no-overlay bg-image text-center py-14 py-md-16 bg-map"
+         data-image-src="{% static 'images/new/map.png' %}">
+    <div class="container py-0 py-md-18">
+        <div class="row">
+            <div class="col-lg-6 col-xl-5 mx-auto">
+                <h2 class="display-4 mb-3 text-center">{{ HOME_TELEGRAM_GROUP.title }}</h2>
+                <p class="lead mb-5 px-md-16 px-lg-3">{{ HOME_TELEGRAM_GROUP.body }}</p>
+                <a href="{{ HOME_TELEGRAM_GROUP.button_link }}" class="btn btn-primary rounded-pill">{{ HOME_TELEGRAM_GROUP.button_title }}</a>
+            </div>
+            <!-- /column -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+
+<section class="section-frame mx-xxl-11 overflow-hidden">
+    <div class="wrapper image-wrapper bg-image bg-cover bg-overlay bg-overlay-light-500"
+         data-image-src="{% static 'images/new/bg23.png' %}">
+        <div class="container py-16 py-md-18 text-center">
+            <div class="position-absolute shape yellow d-none d-lg-block w-5" style="top: 18%; left: 5%;"><img
+                    src="{% static 'images/pie.svg' %}" class="svg-inject icon-svg w-100 h-100" alt=""></div>
+            <div class="position-absolute shape leaf d-none d-lg-block w-10" style="bottom: 30%; left: 2%;"><img
+                    src="{% static 'images/scribble.svg' %}" class="svg-inject icon-svg w-100 h-100" alt=""></div>
+            <div class="position-absolute shape fuchsia d-none d-lg-block w-6"
+                 style="top: 20%; right: 2%; transform: rotate(70deg);"><img src="{% static 'images/tri.svg' %}"
+                                                                             class="svg-inject icon-svg w-100 h-100"
+                                                                             alt=""></div>
+            <div class="position-absolute shape grape d-none d-lg-block w-6" style="bottom: 28%; right: 5%;"><img
+                    src="{% static 'images/circle.svg' %}" class="svg-inject icon-svg w-100 h-100" alt=""></div>
+            <div class="row">
+                <div class="col-lg-9 col-xxl-8 mx-auto">
+                    <h1 class="display-1 fs-60 mx-lg-n10 mx-xl-0 mb-5">{{ HOME_QUESTION.title }}</h1>
+                    <p class="lead fs-24 px-md-12 px-lg-0 mx-lg-n10 mx-xl-0 mb-8">{{ HOME_QUESTION.body }}</p>
+                    <a href="{{ HOME_QUESTION.button_link }}" class="btn btn-lg btn-primary btn-icon btn-icon-end">{{ HOME_QUESTION.button_title }} <i
+                            class="uil uil-arrow-up-right"></i></a>
+                </div>
+                <!-- /column -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.wrapper -->
+</section>
+<!-- /section -->
+{% endblock content %}

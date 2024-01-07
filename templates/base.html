@@ -1,0 +1,136 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+          content="{{ SEO_SETTINGS.description }}">
+    <meta name="keywords"
+          content="{{ SEO_SETTINGS.keywords }}">
+    <meta name="author" content="{{ SEO_SETTINGS.author }}">
+
+    <title>{{ SEO_SETTINGS.title }}</title>
+
+    <link rel="shortcut icon" href="{{ SEO_SETTINGS.favicon.url }}">
+
+    <link rel="stylesheet" href="{% static 'css/plugins.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navy.css' %}">
+</head>
+
+<body style="">
+<div class="content-wrapper">
+    <header class="wrapper bg-soft-primary my-1">
+        <nav class="navbar navbar-expand-lg center-nav navbar-light navbar-bg-light">
+            <div class="container flex-lg-row flex-nowrap align-items-center">
+                <div class="navbar-brand w-100">
+                    <a href="{% url 'home_page' %}">
+                        <img src="{{ LOGO_SETTINGS.logo.url }}" width="240px" srcset="{{ LOGO_SETTINGS.logo.url }} 2x"
+                             alt="{{ LOGO_SETTINGS.title }}">
+                    </a>
+                </div>
+                <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
+                    <div class="offcanvas-header d-lg-none">
+                        <h3 class="text-white fs-30 mb-0">{{ LOGO_SETTINGS.title }}</h3>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                    </div>
+
+                    <div class="offcanvas-body ms-lg-auto d-flex flex-column h-100">
+                        <ul class="navbar-nav">
+                            {% for i in ONE_HEADER %}
+                                {% if i.is_submenu %}
+                                    {% if i.link == '#oqituvchi' %}
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ i.title }}</a>
+                                            <ul class="dropdown-menu">
+                                                {% for k in FAYLLAR_KATEGORIYASI %}
+                                                    <li class="nav-item">
+                                                        <a class="dropdown-item" href="{% url 'more_page' category_id=k.id %}">{{ k.nomi }}</a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    {% else %}
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ i.title }}</a>
+                                            <ul class="dropdown-menu">
+                                                {% for k in TWO_HEADER %}
+                                                    {% if k.one_header.id == i.id %}
+                                                        <li class="nav-item">
+                                                            <a class="dropdown-item" href="{{ k.link }}">{{ k.title }}</a>
+                                                        </li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    {% endif %}
+                                {% else %}
+                                    <li class="nav-item">
+                                        <a href="{{ i.link }}" class="nav-link">{{ i.title }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+
+                        <div class="offcanvas-footer d-lg-none">
+                            <div>
+                                <a href="mailto:{{ PHONE_EMAIL_SETTINGS.email1 }}" class="link-inverse"><span>{{ PHONE_EMAIL_SETTINGS.email1 }}</span></a>
+                                <br> {{ PHONE_EMAIL_SETTINGS.phone1 }}<br>
+                                <nav class="nav social social-white mt-4">
+                                    {% for i in SOCIAL_SETTINGS %}
+                                        <a href="{{ i.link }}"><i class="{{ i.icon }}"></i></a>
+                                    {% endfor %}
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="navbar-other w-100 d-flex ms-auto">
+                    <ul class="navbar-nav flex-row align-items-center ms-auto">
+                        <li class="nav-item d-none d-md-block">
+                            <a href="{{ RIGHT_BUTTON_SETTINGS.link }}" class="btn btn-sm btn-primary">{{ RIGHT_BUTTON_SETTINGS.title }}</a>
+                        </li>
+                        <li class="nav-item d-lg-none">
+                            <button class="hamburger offcanvas-nav-btn"><span></span></button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    {% block content %}
+    {% endblock content %}
+</div>
+
+<footer>
+    <div class="container py-7">
+        <div class="d-md-flex align-items-center justify-content-between">
+            <p class="mb-2 mb-lg-0">{{ FOOTER_SETTINGS.title }}</p>
+
+            <nav class="nav social social-muted mb-0 text-md-end">
+                {% for i in SOCIAL_SETTINGS %}
+                    <a href="{{ i.link }}"><i class="{{ i.icon }}"></i></a>
+                {% endfor %}
+            </nav>
+            <p>Loyiha muallifi <span class="text-success">Suropov Bahodir</span></p>
+        </div>
+    </div>
+</footer>
+
+<div class="progress-wrap">
+    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
+    </svg>
+</div>
+
+<script data-cfasync="false" src="{% static 'js/email-decode.min.js' %}"></script>
+<script src="{% static 'js/plugins.js' %}"></script>
+<script src="{% static 'js/theme.js' %}"></script>
+{% block scripts %}
+{% endblock %}
+</body>
+</html>

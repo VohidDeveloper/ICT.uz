@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="wrapper bg-gray">
+    <div class="container py-12 py-md-16 text-center">
+        <div class="row">
+            <div class="col-lg-10 col-xxl-8 mx-auto">
+                <h1 class="display-1 mb-3">Video darslar</h1>
+                <p class="lead mb-1">Interaktiv video darslar bilan tanishib boring.</p>
+            </div>
+            <!-- /column -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<section class="wrapper bg-light">
+    <div class="container py-14 py-md-16">
+        <div class="row align-items-center mb-10 position-relative zindex-1">
+            <div class="col-md-8 col-lg-9 col-xl-8 col-xxl-7 pe-xl-20">
+                <h2 class="display-6">Video darslar</h2>
+                <nav class="d-inline-block" aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{% url 'home_page' %}">Bosh sahifa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Video darslar</li>
+                    </ol>
+                </nav>
+                <!-- /nav -->
+            </div>
+            <!--/column -->
+        </div>
+        <!--/.row -->
+        <div class="grid grid-view projects-masonry shop mb-13">
+            <div class="row gx-md-8 gy-10 gy-md-13 isotope" style="position: relative; height: 1933.88px;">
+                {% for video in VIDEOS %}
+                    <div class="project item col-md-6 col-xl-4" style="position: absolute; left: 33.3333%; top: 0px;">
+                        <figure class="rounded mb-6">
+                            <div class="player" data-plyr-provider="youtube" data-plyr-embed-id="{{ video.video_id }}"></div>
+                        </figure>
+                        <div class="post-header">
+                            <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+                                <div class="post-category text-ash mb-0">{{ video.category.title }}</div>
+                                <span class="ratings {{ video.rating }}"></span>
+                            </div>
+                            <h2 class="post-title h3 fs-22"><a class="link-dark">{{ video.title }}</a>
+                            </h2>
+                            <p class="price"><span class="amount">{{ video.body }}</span></p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.grid -->
+        <nav class="d-flex justify-content-center" aria-label="pagination">
+            <ul class="pagination">
+                {% if VIDEOS.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ VIDEOS.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true"><i class="uil uil-arrow-left"></i></span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                    <a class="page-link" aria-label="Previous">
+                        <span aria-hidden="true"><i class="uil uil-arrow-left"></i></span>
+                    </a>
+                </li>
+                {% endif %}
+
+                {% for page_num in VIDEOS.paginator.page_range %}
+                    <li {% if VIDEOS.number == page_num %} class="page-item active"{% else %} class="page-item" {% endif %}>
+                        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                    </li>
+                {% endfor %}
+
+                {% if VIDEOS.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ VIDEOS.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true"><i class="uil uil-arrow-right"></i></span>
+                        </a>
+                    </li>
+
+                    <li><a href="?page={{ VIDEOS.next_page_number }}" aria-label="Next"><i class="feather-chevron-right"></i></a></li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" aria-label="Next">
+                            <span aria-hidden="true"><i class="uil uil-arrow-right"></i></span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+            <!-- /.pagination -->
+        </nav>
+        <!-- /nav -->
+    </div>
+    <!-- /.container -->
+</section>
+{% endblock content %}

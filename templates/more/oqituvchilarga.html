@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% if KATEGORIYA.orqa_fon %}
+    <section class="wrapper image-wrapper bg-image bg-overlay text-white" data-image-src="{{ KATEGORIYA.orqa_fon.url }}">
+{% else %}
+    <section class="wrapper bg-gray">
+{% endif %}
+
+    <div class="container py-12 py-md-16 text-center">
+        <div class="row">
+            <div class="col-lg-10 col-xxl-8 mx-auto">
+                <h1 class="display-1 mb-3 text-white">{{ KATEGORIYA.nomi }}</h1>
+                <p class="lead mb-1 text-white">{{ KATEGORIYA.matn }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="wrapper bg-light">
+    <div class="container py-14 py-md-16">
+        <div class="row align-items-center mb-10 position-relative zindex-1">
+            <div class="col-md-8 col-lg-9 col-xl-8 col-xxl-7 pe-xl-20">
+                <h2 class="display-6">Ma'ruza mashg'ulotlari</h2>
+                <nav class="d-inline-block" aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="/">Bosh sahifa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Ma'ruza mashg'ulotlari</li>
+                    </ol>
+                </nav>
+                <!-- /nav -->
+            </div>
+            <!--/column -->
+        </div>
+        <!--/.row -->
+        <div class="row gx-md-5 gy-5 mt-n19 mb-14 mb-md-17">
+            {% for file in FAYLLAR %}
+                <div class="col-12">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
+                                 data-inject-url="https://sandbox.elemisthemes.com/assets/img/icons/solid/delivery-box.svg"
+                                 class="svg-inject icon-svg icon-svg-sm solid-mono text-green mb-3">
+                                <path class="fill-secondary"
+                                      d="M172 20.57L55.79 80 9.6 57.32 123.71 1A9.43 9.43 0 01132 1zm74.27 36.75l-118.21 58.56-44.27-21.8-6.38-3.25L193.7 31.36l6.4 3.24z"></path>
+                                <path class="fill-primary"
+                                      d="M118.59 132.76L118.46 256 5.23 196.91A9.89 9.89 0 010 188.22V74.2l48 23.64v41.55a9.6 9.6 0 1019.2 0v-31.94l6.4 3.12zm137.28-58.43l-118.08 58.31-.13 123.23L256 194.08z"></path>
+                            </svg>
+                            <h4>{{ file.nomi }}</h4>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <b>Yuklab olishlar soni: </b>{{ file.yuklashlar_soni }}ta
+                                </div>
+                                <div>
+                                    <a href="{% url 'media_file_download' pk=file.pk %}" class="more hover link-green">Yuklab olish</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.card-body -->
+                    </div>
+                    <!--/.card -->
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock content %}
